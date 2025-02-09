@@ -11,7 +11,7 @@ const Flashcards = () => {
   }, []);
 
   const fetchFlashcards = () => {
-    axios.get("http://localhost:5000/api/flashcards")
+    axios.get("https://curly-meme-x5pr4447w5x6cpv49-5173.app.github.dev/api/flashcards")
       .then(response => setFlashcards(response.data))
       .catch(error => console.error("Error al obtener las flashcards:", error));
   };
@@ -19,7 +19,7 @@ const Flashcards = () => {
   // Manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:5000/api/flashcards", { pregunta, respuesta })
+    axios.post("https://curly-meme-x5pr4447w5x6cpv49-5173.app.github.dev/api/flashcards", { pregunta, respuesta })
       .then(() => {
         setPregunta(""); 
         setRespuesta(""); 

@@ -1,10 +1,21 @@
-// models/Tema.js
 const mongoose = require('mongoose');
 
-const TemaSchema = new mongoose.Schema({
-  titulo: { type: String, required: true },
-  descripcion: { type: String },
-  completado: { type: Boolean, default: false },
-}, { timestamps: true });
+const ColeccionSchema = new mongoose.Schema({
+  nombre: { type: String, required: true },
+  contenido: { type: String, required: true }
+});
 
-module.exports = mongoose.model('Tema', TemaSchema);
+const SubtemaSchema = new mongoose.Schema({
+  nombre: { type: String, required: true },
+  colecciones: [ColeccionSchema]
+});
+
+const TemaSchema = new mongoose.Schema({
+  nombre: { type: String, required: true, unique: true },
+  descripcion: String,
+  subtemas: [SubtemaSchema]
+});
+
+const Tema = mongoose.model('Tema', TemaSchema);
+module.exports = Tema;
+

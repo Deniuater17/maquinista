@@ -3,6 +3,8 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const temaRoutes = require('./routes/temaRoutes');
 const flashcardRoutes = require('./routes/flashcardRoutes');
+const uploadRoutes = require('./routes/routesUpload'); // Importa la ruta de subida
+
 
 // Configuración de variables de entorno
 dotenv.config();
@@ -14,9 +16,14 @@ connectDB();
 const app = express();
 app.use(express.json()); // Middleware para parsear JSON
 
+//habilitar cors
+const cors = require('cors');
+app.use(cors()); // Permitir CORS
+
 // Rutas
 app.use('/api/temas', temaRoutes);
 app.use('/api/flashcards', flashcardRoutes);
+app.use('/api', uploadRoutes); // Esto montará el endpoint /api/upload
 
 // Middleware para manejar errores
 app.use((err, req, res, next) => {
